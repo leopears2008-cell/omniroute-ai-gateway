@@ -1,0 +1,7 @@
+{
+  "$schema": "https://stryker-mutator.io/schemas/stryker-schema.json",
+  "_comment": "Override one-off para medir REDUND\u00c2NCIA de testes (R1, Quality Gate v2 / Fase 9 T5). Estende stryker.conf.json mas (a) desliga o bail -> grava TODOS os testes que matam cada mutante em killedBy (sob bail, killedBy lista s\u00f3 o PRIMEIRO killer, ent\u00e3o \ud83d\udfe0 redundant fica subestimado e \ud83d\udfe2 unique superestimado \u2014 ver o caveat em scripts/quality/mutation-radiography.mjs); (b) desliga o incremental -> medi\u00e7\u00e3o limpa, sem reaproveitar killedBy parcial de runs com bail. N\u00c3O \u00e9 usado pelo nightly (nightly-mutation.yml continua com bail+incremental); s\u00f3 roda via .github/workflows/mutation-redundancy.yml (workflow_dispatch). Consome-se o mutation.json resultante com 'mutation-radiography.mjs --candidates' (o killedBy completo torna \ud83d\udfe0 redundant ACURADO).",
+  "extends": "./stryker.conf.json",
+  "disableBail": true,
+  "incremental": false
+}
